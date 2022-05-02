@@ -84,3 +84,15 @@ datastore_delete = ckanext.signal(u"datastore_delete")
 """This signal is sent after successful call to `datastore_delete`.
 
 """
+
+package_updated = ckan.signal(u"package_updated")
+"""
+This signal is sent after successful call to `package_update`.
+
+"""
+
+resource_updated = ckan.signal(u"resource_updated")
+"""
+This signal is sent after successful call to `resource_update`.
+
+"""

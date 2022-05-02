@@ -24,6 +24,7 @@ import ckan.lib.navl.validators as validators
 import ckan.lib.plugins as lib_plugins
 import ckan.lib.email_notifications as email_notifications
 import ckan.lib.search as search
+import ckan.lib.signals as signals
 import ckan.lib.uploader as uploader
 import ckan.lib.datapreview
 import ckan.lib.app_globals as app_globals
@@ -326,6 +327,7 @@ def package_update(
     model.Session.refresh(pkg)
 
     pkg = model_save.package_dict_save(data, context)
+    signals.package_updated.send(pkg.name, pkg=pkg)
 
     context_org_update = context.copy()
     context_org_update['ignore_auth'] = True
