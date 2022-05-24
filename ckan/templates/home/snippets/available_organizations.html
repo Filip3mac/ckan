@@ -1,0 +1,13 @@
+{% set organizations = h.organizations_available() %}
+
+ <h3>{{ _('Available organizations') }}</h3>
+
+<div class="wide">
+<ul class="media-grid">
+    {% for organization in organizations %}
+    <div class="box">
+        {% snippet 'organization/snippets/organization_item.html', organization=organization %}
+    </div>
+    {% endfor %}
+</ul>
+</div>

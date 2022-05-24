@@ -851,6 +851,11 @@ groups:
       - key: ckan.site_intro_text
         example: Nice introductory paragraph about CKAN or the site in general.
         description: This is for an introductory text used in the default template's index page.
+      
+      - key: ckan.placeholder_image_url
+        example: /base/images/placeholder-420x220.png
+        default: /base/images/placeholder-420x220.png
+        description: This sets placeholder image on the homepage
 
       - key: ckan.site_logo
         default: /base/images/ckan-logo.png

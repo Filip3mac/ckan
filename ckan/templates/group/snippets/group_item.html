@@ -13,6 +13,8 @@ Example:
 #}
 {% set type = group.type or 'group' %}
 {% set url = h.url_for(type ~ '.read', id=group.name) %}
+{% set position = position|default(0) %}
+
 {% block item %}
 <li class="media-item">
   {% block item_inner %}

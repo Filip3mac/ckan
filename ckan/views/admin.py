@@ -46,6 +46,9 @@ def _get_config_options() -> dict[str, list[dict[str, str]]]:
     }, {
         u'value': u'3',
         u'text': u'Search, introductory area and stats'
+    },{
+        u'value': u'4',
+        u'text': u'Search, featured organization and featured group'
     }]
 
     return dict(homepages=homepages)

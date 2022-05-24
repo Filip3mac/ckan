@@ -1,0 +1,13 @@
+{% set groups = h.groups_available() %}
+
+<h3>{{ _('Available groups') }}</h3>
+
+<div class="wide">
+    <ul class="media-grid" data-module="media-grid">
+        {% for group in groups %}
+        <div class="box">
+            {% snippet 'group/snippets/group_item.html', group=group %}
+        </div>
+        {% endfor %}
+    </ul>
+</div>

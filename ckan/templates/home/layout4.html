@@ -1,0 +1,21 @@
+<div class="container">
+    {% block hero %}
+            {% snippet 'home/snippets/hero.html' %}
+          {% endblock %}
+  </div>
+</div>
+
+<div class="container">
+    <div class="row">
+            {% block featured_organization %}
+            {% snippet 'home/snippets/available_organizations.html' %}
+            {% endblock %}
+    </div>
+</div>
+<div class="container">
+    <div class="row ">
+        {% block featured_group %}
+            {% snippet 'home/snippets/available_groups.html' %}
+            {% endblock %}
+    </div>
+</div>

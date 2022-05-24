@@ -48,6 +48,7 @@ app_globals_from_config_details: dict[str, dict[str, str]] = {
     'ckan.dumps_url': {},
     'ckan.dumps_format': {},
     'ckan.homepage_style': {'default': '1'},
+    'ckan.placeholder_image_url': {},
 
     # split string
     'search.facets': {'default': 'organization groups tags res_format license_id',
