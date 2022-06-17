@@ -5,6 +5,7 @@ import six
 from bs4 import BeautifulSoup
 
 import ckan.authz as authz
+import ckan.model as model
 from ckan.lib.helpers import url_for
 from ckan.tests import factories, helpers
 
@@ -575,3 +576,41 @@ class TestOrganizationMembership(object):
                 },
                 status=403,
             )
+
+    def test_create_user_for_user_invite(self, mail_server):
+        group = factories.Group()
+        sysadmin = factories.Sysadmin()
+        context = {"user": sysadmin["name"]}
+
+        user_form = {
+            "email": "user@ckan.org",
+            "group_id": group["id"],
+            "role": "member"
+        }
+
+        user_dict = helpers.call_action("user_invite", context, **user_form)
+        user_obj = model.User.get(user_dict["id"])
+
+        assert user_obj.password is None
+        assert user_obj.state == 'pending'
+        assert user_obj.last_active is None
+
+    def test_member_delete(self, app):
+        sysadmin = factories.Sysadmin()
+        user = factories.User()
+        org = factories.Organization(
+            users=[{"name": user["name"], "capacity": "member"}]
+        )
+        env = {"REMOTE_USER": six.ensure_str(sysadmin["name"])}
+        # our user + test.ckan.net
+        assert len(org["users"]) == 2
+        with app.flask_app.test_request_context():
+            app.post(
+                url_for("organization.member_delete", id=org["id"], user=user["id"]),
+                extra_environ=env,
+            )
+            org = helpers.call_action('organization_show', id=org['id'])
+
+            # only test.ckan.net
+            assert len(org['users']) == 1
+            assert user["id"] not in org["users"][0]["id"]
